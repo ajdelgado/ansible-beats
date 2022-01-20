@@ -1,0 +1,19 @@
+---
+- name: Ensure required software to compile filebeat is installed
+  package:
+    name:
+      - golang
+      - python-pip
+      - git
+
+- name: Ensure beats repository is cloned
+  git:
+    repo: https://github.com/elastic/beats.git
+    dest: /usr/src/beats
+    depth: 1
+    update: yes
+
+# - name: Make filebeat
+#   shell: make
+#   args:
+#     chdir: /usr/src/beats/filebeat

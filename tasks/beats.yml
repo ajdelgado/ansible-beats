@@ -1,11 +1,15 @@
 ---
 # Install OS specific beats
 
-- name: Include specific Beats
+- name: Include specific Beats for Debian
   include_tasks: beats-debian.yml
-  when: ansible_os_family == 'Debian'
+  when: ansible_facts["lsb"]["id"] == 'Debian'
 
-- name: Include specific Beats
+- name: Include specific Beats for Raspbian
+  include_tasks: beats-raspbian.yml
+  when: ansible_facts["lsb"]["id"] == 'Raspbian'
+
+- name: Include specific Beats for Red Hat
   include_tasks: beats-redhat.yml
   when: ansible_os_family == 'RedHat'
 
