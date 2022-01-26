@@ -3,7 +3,7 @@
 
 - name: Include specific Beats for Debian
   include_tasks: beats-debian.yml
-  when: ansible_facts["lsb"]["id"] == 'Debian'
+  when: ansible_facts["lsb"]["id"] == 'Debian' or ansible_facts["lsb"]["id"] == 'Ubuntu'
 
 - name: Include specific Beats for Raspbian
   include_tasks: beats-raspbian.yml
@@ -21,7 +21,7 @@
 - name: Start {{ beat_product }} service
   become: yes
   service:
-    name: '{{ beat }}'
+    name: "{{ beat }}"
     state: started
     enabled: true
   when: start_service
